@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IRecipe } from "./entities/recipe.entity";
-import recipes from "./recipes.json";
+import * as recipes from "./recipes.json";
 
 export const I_BASE_REPOSITORY_TOKEN = "IBaseRepository";
 

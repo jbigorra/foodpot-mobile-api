@@ -7,12 +7,7 @@ import {
 
 @Module({
   controllers: [RecipesController],
-  providers: [
-    {
-      provide: I_BASE_REPOSITORY_TOKEN,
-      useValue: RecipesInMemoryRepository
-    }
-  ],
+  providers: [RecipesInMemoryRepository],
   exports: []
 })
 export class RecipesModule {}
