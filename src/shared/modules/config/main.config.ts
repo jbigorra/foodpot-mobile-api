@@ -2,7 +2,7 @@
 export default () => ({
   env: process.env.NODE_ENV,
   server: {
-    port: parseInt(process.env.PORT, 10)
+    port: 3000
   },
   supabase: {
     apiUrl: process.env.SUPABASE_URL,
