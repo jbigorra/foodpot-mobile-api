@@ -1,4 +1,4 @@
-import Joi from "@hapi/joi";
+import * as Joi from "@hapi/joi";
 
 export const serverConfigValidationSchema = Joi.object({
   env: Joi.string().valid("local", "dev", "prod").default("local"),
