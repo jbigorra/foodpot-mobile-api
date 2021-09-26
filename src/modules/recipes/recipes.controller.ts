@@ -12,7 +12,7 @@ export class RecipesController {
 
   @Get()
   async getAll(): Promise<RecipeResponseDTO[]> {
-    const recipes = await this.recipesRepository.getAll();
+    const recipes = await this.recipesRepository.getAll({ limit: 50 });
     console.log(recipes);
     return RecipeResponseDTO.from(recipes);
   }
