@@ -6,9 +6,9 @@ import { SupabaseConfig } from "./supabase.config";
 import { ServerConfig } from "./server.config";
 
 const envFileMap = {
-  local: ".env/.env.local",
-  dev: ".env/.env.dev",
-  prod: ".env/.env.prod"
+  // local: ".environment/.env.local",
+  dev: ".environment/.env.dev",
+  prod: ".environment/.env.prod"
 };
 
 @Module({
@@ -16,7 +16,7 @@ const envFileMap = {
     ConfigModule.forRoot({
       load: [configuration],
       validationSchema: serverConfigValidationSchema,
-      envFilePath: envFileMap[process.env.NODE_ENV] || envFileMap.local
+      envFilePath: envFileMap[process.env.NODE_ENV] || envFileMap.dev
     })
   ],
   providers: [ConfigService, SupabaseConfig, ServerConfig],
