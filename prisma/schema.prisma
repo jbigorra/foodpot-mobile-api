@@ -9,3 +9,36 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Recipe {
+  id Int @id @default(autoincrement())
+  uuid String @db.Uuid @unique @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime @db.Timestamptz(3) @default(now())
+  updatedAt DateTime  @db.Timestamptz(3) @updatedAt
+  deletedAt DateTime? @db.Timestamptz(3)
+  pageUrl String @unique
+  pictureUrl String
+  servings Int?
+  tags String[]
+  cookTime String @db.VarChar(35) @default("")
+  prepTime String @db.VarChar(35) @default("")
+  marinateTime String @db.VarChar(35) @default("")
+  calories String @db.VarChar(35) @default("")
+  ingredients Ingredient[]
+
+  @@index([tags])
+}
+
+model Ingredient {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @db.Timestamptz(3) @default(now())
+  updatedAt DateTime  @db.Timestamptz(3) @updatedAt
+  deletedAt DateTime? @db.Timestamptz(3)
+  name String @db.VarChar(250) @default("")
+  quantity String @db.VarChar(10) @default("")
+  unit String @db.VarChar(25) @default("")
+  description String @db.VarChar(285) @default("")
+  recipeId Int
+
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+}
