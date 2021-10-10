@@ -16,6 +16,7 @@ model Recipe {
   createdAt DateTime @db.Timestamptz(3) @default(now())
   updatedAt DateTime  @db.Timestamptz(3) @updatedAt
   deletedAt DateTime? @db.Timestamptz(3)
+  title String @db.VarChar(256)
   pageUrl String @unique
   pictureUrl String
   servings Int?
