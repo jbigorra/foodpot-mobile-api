@@ -42,6 +42,7 @@ async function main(): Promise<void> {
     await prisma.recipe
       .create({
         data: {
+          title: recipe.title,
           pageUrl: recipe.page_url,
           pictureUrl: recipe.picture_url || "",
           tags: recipe.tags.filter((v) => v !== null),
