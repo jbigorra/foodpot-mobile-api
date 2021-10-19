@@ -25,9 +25,10 @@ model Recipe {
   prepTime String @db.VarChar(35) @default("")
   marinateTime String @db.VarChar(35) @default("")
   calories String @db.VarChar(35) @default("")
+  searchTerms String @db.Text @default("")
   ingredients Ingredient[]
 
-  @@index([tags, title])
+  @@index([tags, title, searchTerms])
 }
 
 model Ingredient {
