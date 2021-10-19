@@ -1,40 +1,45 @@
-export class RecipeResponseDTO {
-  calories: IUnit;
-  cookTime: IUnit;
-  id: number;
-  ingredients: IIngredient[];
-  marinateTime: IUnit;
-  pageUrl: string;
-  pictureUrl: string;
-  prepTime: IUnit;
-  servings: number;
-  tags: string[];
+import { Ingredient } from "@prisma/client";
+import { RecipeWithIngredients } from "./db/user.queries";
 
-  static from(recipes: IRecipe[]): RecipeResponseDTO[] {
-    return recipes as RecipeResponseDTO[];
+export class RecipeResponseDTO {
+  constructor(
+    readonly calories: string,
+    readonly cookTime: string,
+    readonly id: number,
+    readonly title: string,
+    readonly ingredients: IngredientDTO[],
+    readonly marinateTime: string,
+    readonly pageUrl: string,
+    readonly pictureUrl: string,
+    readonly prepTime: string,
+    readonly servings: number
+  ) {}
+
+  static fromDbModel(recipes: RecipeWithIngredients[]): RecipeResponseDTO[] {
+    return recipes.map(
+      (r) =>
+        new RecipeResponseDTO(
+          r.calories,
+          r.cookTime,
+          r.id,
+          r.title,
+          IngredientDTO.fromDbModel(r.ingredients),
+          r.marinateTime,
+          r.pageUrl,
+          r.pictureUrl,
+          r.prepTime,
+          r.servings
+        )
+    );
   }
 }
 
-export interface IRecipe {
-  pageUrl: string;
-  tags: string[];
-  pictureUrl: string;
-  id: number;
-  cookTime: IUnit;
-  prepTime: IUnit;
-  marinateTime: IUnit;
-  calories: IUnit;
-  servings: number;
-  ingredients: IIngredient[];
-}
+export class IngredientDTO {
+  constructor(readonly description: string) {}
 
-export interface IIngredient {
-  name: string;
-  quantity: string;
-  unit?: string;
-}
-
-export interface IUnit {
-  value: number;
-  unit: string;
+  static fromDbModel(ingredients: Ingredient[]): IngredientDTO[] {
+    return ingredients.map(
+      (ingredient) => new IngredientDTO(ingredient.description)
+    );
+  }
 }

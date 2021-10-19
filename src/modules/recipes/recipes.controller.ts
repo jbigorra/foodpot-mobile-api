@@ -1,19 +1,30 @@
-import { Controller, Get, Inject } from "@nestjs/common";
-import { RecipeResponseDTO } from "./recipes.controller.dtos";
+import { Recipe } from ".prisma/client";
 import {
-  I_BASE_REPOSITORY_TOKEN,
-  IBaseRepository,
-  RecipesInMemoryRepository
-} from "./recipes.in-memory.repository";
+  Controller,
+  DefaultValuePipe,
+  Get,
+  ParseIntPipe,
+  Query
+} from "@nestjs/common";
+import { DbCursorPipe } from "src/pipes/db-cursor.pipe";
+import { RecipesQueries } from "./db/user.queries";
+import { RecipeResponseDTO } from "./recipes.controller.dtos";
 
 @Controller("recipes")
 export class RecipesController {
-  constructor(private recipesRepository: RecipesInMemoryRepository) {}
+  constructor(private queryRecipes: RecipesQueries) {}
 
   @Get()
-  async getAll(): Promise<RecipeResponseDTO[]> {
-    const recipes = await this.recipesRepository.getAll({ limit: 50 });
-    console.log(recipes);
-    return RecipeResponseDTO.from(recipes);
+  async getAll(
+    @Query("lastRecipeId", DbCursorPipe) lastRecipeId: number,
+    @Query("take", new DefaultValuePipe(50), ParseIntPipe) take: number,
+    @Query("searchText") searchText: string
+  ): Promise<RecipeResponseDTO[]> {
+    const recipes = await this.queryRecipes.getManyByText({
+      cursor: lastRecipeId,
+      take,
+      searchText
+    });
+    return RecipeResponseDTO.fromDbModel(recipes);
   }
 }

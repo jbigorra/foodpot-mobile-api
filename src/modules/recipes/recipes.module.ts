@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { DbModule } from "src/shared/modules/database/db.module";
+import { RecipesQueries } from "./db/user.queries";
 import { RecipesController } from "./recipes.controller";
 import {
   I_BASE_REPOSITORY_TOKEN,
@@ -6,8 +8,9 @@ import {
 } from "./recipes.in-memory.repository";
 
 @Module({
+  imports: [DbModule],
   controllers: [RecipesController],
-  providers: [RecipesInMemoryRepository],
+  providers: [RecipesInMemoryRepository, RecipesQueries],
   exports: []
 })
 export class RecipesModule {}
