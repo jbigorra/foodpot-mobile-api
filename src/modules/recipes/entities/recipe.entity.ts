@@ -1,4 +1,5 @@
 export class Recipe implements IRecipe {
+  title: string;
   calories: IUnit;
   cookTime: IUnit;
   id: number;
@@ -12,6 +13,7 @@ export class Recipe implements IRecipe {
 }
 
 export interface IRecipe {
+  title: string;
   pageUrl: string;
   tags: string[];
   pictureUrl: string;
