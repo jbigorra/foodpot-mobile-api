@@ -8,6 +8,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 model Recipe {
@@ -28,7 +29,9 @@ model Recipe {
   searchTerms String @db.Text @default("")
   ingredients Ingredient[]
 
-  @@index([tags, title, searchTerms])
+  @@index([searchTerms])
+  @@index([cookTime])
+  @@index([prepTime])
 }
 
 model Ingredient {
