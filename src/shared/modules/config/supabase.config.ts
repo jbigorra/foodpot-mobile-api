@@ -10,7 +10,7 @@ export class SupabaseConfig {
   }
 
   get publicApiKey(): string {
-    return this.configService.get<string>("supabase.publicApiUrl");
+    return this.configService.get<string>("supabase.publicApiKey");
   }
 
   get databaseUrl(): string {

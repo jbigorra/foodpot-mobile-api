@@ -22,4 +22,4 @@ const envFileMap = {
   providers: [ConfigService, SupabaseConfig, ServerConfig],
   exports: [ConfigService, SupabaseConfig, ServerConfig]
 })
-export class AppConfigModule {}
+export class ServerConfigModule {}
