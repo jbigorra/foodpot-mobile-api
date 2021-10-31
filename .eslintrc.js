@@ -29,7 +29,7 @@ module.exports = {
     ],
     "@typescript-eslint/explicit-function-return-type": 1,
     "@typescript-eslint/explicit-module-boundary-types": 2,
-    "@typescript-eslint/no-explicit-any": 2,
+    "@typescript-eslint/no-explicit-any": 1,
     quotes: ["error", "double"],
   },
 };
