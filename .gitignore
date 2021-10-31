@@ -40,3 +40,8 @@ lerna-debug.log*
 
 # Supabase
 .supabase
+
+# Supabase
+**/supabase/.temp
+**/supabase/.env
+**/supabase/.globals.sql
