@@ -2,6 +2,8 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
+  NotFoundException,
+  Param,
   ParseIntPipe,
   Query
 } from "@nestjs/common";
@@ -24,6 +26,15 @@ export class RecipesController {
       take,
       searchText
     });
-    return RecipeResponse.fromDbModel(recipes);
+    return RecipeResponse.fromArrayOf(recipes);
+  }
+
+  @Get(":uuid")
+  async getOne(@Param("uuid") uuid: string): Promise<RecipeResponse> {
+    const recipe = await this.queryRecipes.getOneByUuid(uuid);
+
+    if (!recipe) throw new NotFoundException();
+
+    return RecipeResponse.fromOne(recipe);
   }
 }

@@ -35,4 +35,15 @@ export class RecipesQueries {
       }
     });
   }
+
+  async getOneByUuid(uuid: string): Promise<RecipeWithIngredients | null> {
+    return this.db.recipe.findUnique({
+      where: {
+        uuid: uuid
+      },
+      include: {
+        ingredients: true
+      }
+    });
+  }
 }

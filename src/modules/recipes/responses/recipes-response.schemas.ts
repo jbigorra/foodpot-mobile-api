@@ -6,6 +6,7 @@ export class RecipeResponse {
     readonly calories: string,
     readonly cookTime: string,
     readonly id: number,
+    readonly uuid: string,
     readonly title: string,
     readonly ingredients: IngredientDTO[],
     readonly marinateTime: string,
@@ -15,13 +16,14 @@ export class RecipeResponse {
     readonly servings: number
   ) {}
 
-  static fromDbModel(recipes: RecipeWithIngredients[]): RecipeResponse[] {
+  static fromArrayOf(recipes: RecipeWithIngredients[]): RecipeResponse[] {
     return recipes.map(
       (r) =>
         new RecipeResponse(
           r.calories,
           r.cookTime,
           r.id,
+          r.uuid,
           r.title,
           IngredientDTO.fromDbModel(r.ingredients),
           r.marinateTime,
@@ -30,6 +32,22 @@ export class RecipeResponse {
           r.prepTime,
           r.servings
         )
+    );
+  }
+
+  static fromOne(recipe: RecipeWithIngredients): RecipeResponse {
+    return new RecipeResponse(
+      recipe.calories,
+      recipe.cookTime,
+      recipe.id,
+      recipe.uuid,
+      recipe.title,
+      IngredientDTO.fromDbModel(recipe.ingredients),
+      recipe.marinateTime,
+      recipe.pageUrl,
+      recipe.pictureUrl,
+      recipe.prepTime,
+      recipe.servings
     );
   }
 }
