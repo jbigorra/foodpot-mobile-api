@@ -59,6 +59,6 @@ export class AuthService {
 
   private _handleError(error: Error): void {
     const e = error as unknown as SupabaseAuthError;
-    throw new HttpException({ error: e.message }, e.status);
+    throw new HttpException(e.message, e.status);
   }
 }
