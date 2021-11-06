@@ -4,6 +4,7 @@ export interface IContextUser {
   readonly phone: string;
   readonly fullName?: string;
   readonly provider?: string;
+  readonly accessToken: string;
 }
 
 declare global {

@@ -50,9 +50,10 @@ describe("AuthMiddleware", () => {
     it.each([[jwtUserWithFullname], [jwtUserWithoutFullname]])(
       "Should attach ContextUser to Request object",
       (jwtUser: JwtUser) => {
+        const accessToken = jwt.encode(jwtUser, "secret-key");
         const req = {
           headers: {
-            authorization: jwt.encode(jwtUser, "secret-key")
+            authorization: accessToken
           }
         } as Request;
         const authMiddleware = new AuthMiddleware();
@@ -65,6 +66,7 @@ describe("AuthMiddleware", () => {
           uuid: jwtUser.sub,
           email: jwtUser.email,
           phone: jwtUser.phone,
+          accessToken: accessToken,
           fullName: jwtUser.user_metadata?.fullName,
           provider: jwtUser.app_metadata.provider
         };

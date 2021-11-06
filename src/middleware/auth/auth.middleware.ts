@@ -19,8 +19,9 @@ export class ContextUser implements IContextUser {
     readonly uuid: string,
     readonly email: string,
     readonly phone: string,
-    readonly fullName?: string,
-    readonly provider?: string
+    readonly accessToken: string,
+    readonly provider: string,
+    readonly fullName?: string
   ) {}
 }
 
@@ -35,8 +36,9 @@ export class AuthMiddleware implements NestMiddleware {
       jwtUser.sub,
       jwtUser.email,
       jwtUser.phone,
-      jwtUser.user_metadata?.fullName,
-      jwtUser.app_metadata?.provider
+      req.headers.authorization,
+      jwtUser.app_metadata.provider,
+      jwtUser.user_metadata?.fullName
     );
 
     next();
