@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from "@nestjs/common";
 import { SupabaseConfig } from "../../shared/modules/config/supabase.config";
-import { createClient, SupabaseClient, User } from "@supabase/supabase-js";
+import {
+  createClient,
+  SupabaseClient,
+  User,
+  UserAttributes
+} from "@supabase/supabase-js";
 
 export type AuthenticatedUser = { accessToken: string; refreshToken: string };
 type SupabaseAuthError = { message: string; status: number };
@@ -55,6 +60,26 @@ export class AuthService {
     if (error) this._handleError(error);
 
     return { accessToken: data.access_token, refreshToken: data.refresh_token };
+  }
+
+  async updateUser(jwt: string, userData: { fullname: string }): Promise<User> {
+    const userAttributes = { data: userData } as UserAttributes;
+    const { data, error } = await this.supabase.auth.api.updateUser(
+      jwt,
+      userAttributes
+    );
+
+    if (error) this._handleError(error);
+
+    return data;
+  }
+
+  async getUser(accessToken: string): Promise<User> {
+    const { data, error } = await this.supabase.auth.api.getUser(accessToken);
+
+    if(error) this._handleError(error);
+
+    return data;
   }
 
   private _handleError(error: Error): void {
