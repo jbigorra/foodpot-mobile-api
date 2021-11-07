@@ -13,7 +13,7 @@ export class UserResponse {
       user.id,
       user.email,
       user.phone,
-      user.app_metadata.fullname || ""
+      user.user_metadata.fullname || ""
     );
   }
 }
