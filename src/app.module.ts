@@ -5,6 +5,7 @@ import { DbModule } from "./shared/modules/database/db.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import { AuthMiddleware } from "./middleware";
+import { supabaseProvider } from "./shared/vendors/supabase/supabase.provider";
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { AuthMiddleware } from "./middleware";
     DbModule,
     AuthModule,
     UsersModule
-  ]
+  ],
+  providers: [supabaseProvider]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {

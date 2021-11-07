@@ -1,16 +1,14 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthController } from "./auth.controller";
-import { AuthService } from "./auth.service";
+import { UsersController } from "./users.controller";
 import { createMock } from "ts-auto-mock";
-import { SupabaseConfig } from "../../shared/modules/config/supabase.config";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { AuthService } from "../auth/auth.service";
 
-describe("AuthController", () => {
-  let controller: AuthController;
+describe("UsersController", () => {
+  let controller: UsersController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [AuthController],
+      controllers: [UsersController],
       providers: [
         {
           provide: AuthService,
@@ -19,7 +17,7 @@ describe("AuthController", () => {
       ]
     }).compile();
 
-    controller = module.get<AuthController>(AuthController);
+    controller = module.get<UsersController>(UsersController);
   });
 
   it("should be defined", () => {

@@ -3,7 +3,7 @@ import { AuthService } from "../modules/auth/auth.service";
 import { ExecutionContext, UnauthorizedException } from "@nestjs/common";
 import { createMock } from "ts-auto-mock";
 
-describe.only("AuthGuard", () => {
+describe("AuthGuard", () => {
   let authService: AuthService;
 
   beforeEach(() => {
