@@ -2,7 +2,8 @@
 export default () => ({
   env: process.env.NODE_ENV,
   server: {
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
+    apiUrl: process.env.API_HOST_URL
   },
   supabase: {
     apiUrl: process.env.SUPABASE_URL,
