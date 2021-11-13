@@ -37,6 +37,7 @@
     "@supabase/storage-js": "^1.4.1",
     "@supabase/supabase-js": "^1.22.6",
     "cross-env": "^7.0.3",
+    "hbs": "^4.1.2",
     "jwt-decode": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recover Foodpot Account</title>
+</head>
+<body>
+  <main>
+    <h1>Account Recovery</h1>
+    <form id="reset-password-form">
+      <label for="password">Password</label>
+      <input type="password" name="password" required/>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" name="confirmPassword" required/>
+
+      <button type="submit">RECOVER</button>
+
+      <div class="error-message" id="error"></div>
+    </form>
+  </main>
+
+  <script type="text/javascript">
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
+      console.log(this.password, this.confirmPassword);
+    }
+
+    const form = document.querySelector("#reset-password-form");
+    form.addEventListener("submit", handleFormSubmit);
+  </script>
+</body>
+</html>

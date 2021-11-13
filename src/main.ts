@@ -2,15 +2,17 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { ServerConfig } from "./shared/modules/config/server.config";
-import { Logger } from "@nestjs/common";
+import { join } from "path";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.setGlobalPrefix("v1");
+  app.setGlobalPrefix("v1", { exclude: ["public/recover-account"] });
+  app.useStaticAssets(join(__dirname, "../src", "public"));
+  app.setBaseViewsDir(join(__dirname, "../src", "views"));
+  app.setViewEngine("hbs");
 
   const serverConfig = app.get(ServerConfig);
-  // const logger = app.get(Logger);
 
   await app.listen(serverConfig.port);
 
