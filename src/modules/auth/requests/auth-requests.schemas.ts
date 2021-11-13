@@ -11,3 +11,7 @@ export class SigninWithEmailRequest {
 export class RefreshUserSessionRequest {
   refreshToken: string;
 }
+
+export class RecoverAccountRequest {
+  email: string;
+}

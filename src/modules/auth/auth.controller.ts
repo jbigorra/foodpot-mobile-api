@@ -3,7 +3,8 @@ import { AuthService } from "./auth.service";
 import {
   RefreshUserSessionRequest,
   SigninWithEmailRequest,
-  SignupWithEmailRequest
+  SignupWithEmailRequest,
+  RecoverAccountRequest
 } from "./requests/auth-requests.schemas";
 import { AuthenticatedUserResponse } from "./responses/auth-responses.schemas";
 
@@ -34,6 +35,11 @@ export class AuthController {
     const data = await this.authService.refreshSession(refreshToken);
 
     return AuthenticatedUserResponse.from(data);
+  }
+
+  @Post("/recover")
+  async recover(@Body() { email }: RecoverAccountRequest): Promise<void> {
+    await this.authService.recoverAccountFor(email);
   }
 
   @Get("/verified")
