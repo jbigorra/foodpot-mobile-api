@@ -1,6 +1,18 @@
-import { Body, Controller, Get, Patch, Req, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Req,
+  UseGuards
+} from "@nestjs/common";
 import { AuthService } from "../auth/auth.service";
-import { UpdateUserRequest } from "./requests/users-requests.schemas";
+import {
+  UpdateEmailRequest,
+  UpdatePasswordRequest,
+  UpdateUserRequest
+} from "./requests/users-requests.schemas";
 import { Request } from "express";
 import { AuthGuard } from "../../guards/auth.guard";
 import { UserResponse } from "./responses/user-response.schemas";
@@ -25,6 +37,33 @@ export class UsersController {
     const userInfo = await this.authService.updateUser(
       user.accessToken,
       userData
+    );
+
+    return UserResponse.from(userInfo);
+  }
+
+  @Post("/password")
+  async updatePassword(
+    @Body() { password }: UpdatePasswordRequest,
+    @Req() { user }: Request
+  ): Promise<UserResponse> {
+    const userInfo = await this.authService.updatePassword(
+      user.accessToken,
+      password
+    );
+
+    return UserResponse.from(userInfo);
+  }
+
+  // TODO: Requires auth flow with email confirmation
+  @Post("/email")
+  async updateEmail(
+    @Body() { email }: UpdateEmailRequest,
+    @Req() { user }: Request
+  ): Promise<UserResponse> {
+    const userInfo = await this.authService.updateEmail(
+      user.accessToken,
+      email
     );
 
     return UserResponse.from(userInfo);

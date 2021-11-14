@@ -56,6 +56,33 @@ export class AuthService {
 
   async updateUser(jwt: string, userData: { fullname: string }): Promise<User> {
     const userAttributes = { data: userData } as UserAttributes;
+
+    const { data, error } = await this.supabase.auth.api.updateUser(
+      jwt,
+      userAttributes
+    );
+
+    if (error) this._handleError(error);
+
+    return data;
+  }
+
+  async updatePassword(jwt: string, password: string): Promise<User> {
+    const userAttributes = { password: password } as UserAttributes;
+
+    const { data, error } = await this.supabase.auth.api.updateUser(
+      jwt,
+      userAttributes
+    );
+
+    if (error) this._handleError(error);
+
+    return data;
+  }
+
+  async updateEmail(jwt: string, email: string): Promise<User> {
+    const userAttributes = { email: email } as UserAttributes;
+
     const { data, error } = await this.supabase.auth.api.updateUser(
       jwt,
       userAttributes
