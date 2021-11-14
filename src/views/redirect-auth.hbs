@@ -9,8 +9,14 @@
 <body>
   <script>
     const queryParams = window.location.href.split("#")[1];
-    const url = "{{ recoverUrl }}";
-    window.location.replace(`${url}?${queryParams}`);
+    const urlParams = new UrlSearchParams(queryParams);
+    const requestType = urlParams.get("type");
+    let url = "{{ recoverUrl }}";
+
+    if (requestType === "recovery")
+      url = "{{ recoverUrl }}";
+
+    if (url) window.location.replace(`${url}?${queryParams}`);
   </script>
 </body>
 </html>

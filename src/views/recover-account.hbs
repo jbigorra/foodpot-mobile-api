@@ -36,10 +36,11 @@
         return;
       }
 
-      fetch("{{apiUrl}}/v1/users", {
-        method: "PATCH",
+      fetch("{{updatePasswordUrl}}", {
+        method: "POST",
         headers: {
-          Authorization: "{{ accessToken }}"
+          "Content-Type": "application/json",
+          "Authorization": "{{ accessToken }}"
         },
         body: JSON.stringify({
           password: this.password.value,
@@ -50,8 +51,9 @@
       })
       .then(res => {
         if (res.statusCode >= 400) {
-          errorContainer.innerHTML = res.message;
+          errorContainer.innerHTML = res.error;
           errorContainer.classList.add("show")
+          return;
         }
 
         form.innerHTML = "Password updated successfully";

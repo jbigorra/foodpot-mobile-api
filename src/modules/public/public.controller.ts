@@ -29,7 +29,10 @@ export class PublicController {
       throw new ForbiddenException();
     }
 
-    return new RecoverAccountTemplateResponse(accessToken);
+    return new RecoverAccountTemplateResponse(
+      accessToken,
+      `${this.serverConfig.apiUrl}/v1/users/password`
+    );
   }
 
   @Get("redirect-auth")
