@@ -23,10 +23,43 @@
   </main>
 
   <script type="text/javascript">
+    const errorContainer = document.querySelector("#error-message");
+
     function handleFormSubmit(e) {
       e.preventDefault();
 
-      console.log(this.password, this.confirmPassword);
+      errorContainer.classList.remove("show");
+
+      if (this.password.value !== this.confirmPassword.value) {
+        errorContainer.innerHTML = "Password and Confirm Password inputs don't match";
+        errorContainer.classList.add("show")
+        return;
+      }
+
+      fetch("{{apiUrl}}/v1/users", {
+        method: "PATCH",
+        headers: {
+          Authorization: "{{ accessToken }}"
+        },
+        body: json.stringify({
+          password: this.password.value,
+        }),
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        if (res.statusCode >= 400) {
+          errorContainer.innerHTML = res.message;
+          errorContainer.classList.add("show")
+        }
+
+        form.innerHTML = "Password updated successfully";
+      })
+      .catch(e => {
+        errorContainer.innerHTML = e.message;
+        errorContainer.classList.add("show")
+      });
     }
 
     const form = document.querySelector("#reset-password-form");
