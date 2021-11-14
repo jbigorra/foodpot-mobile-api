@@ -7,7 +7,9 @@ import { join } from "path";
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.setGlobalPrefix("v1", { exclude: ["public/recover-account"] });
+  app.setGlobalPrefix("v1", {
+    exclude: ["public/recover-account", "public/redirect-auth"]
+  });
   app.useStaticAssets(join(__dirname, "../src", "public"));
   app.setBaseViewsDir(join(__dirname, "../src", "views"));
   app.setViewEngine("hbs");

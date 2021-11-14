@@ -78,7 +78,7 @@ export class AuthService {
     const { error } = await this.supabase.auth.api.resetPasswordForEmail(
       email,
       {
-        redirectTo: `${this.serverConfig.apiUrl}/public/recover-account`
+        redirectTo: `${this.serverConfig.apiUrl}/public/redirect-auth`
       }
     );
 
