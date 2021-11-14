@@ -9,8 +9,8 @@
 <body>
   <script>
     const queryParams = window.location.href.split("#")[1];
-    const url = "{{ apiPublicUrl }}";
-    window.location.replace(`${url}/recover-account?${queryParams}`);
+    const url = "{{ recoverUrl }}";
+    window.location.replace(`${url}?${queryParams}`);
   </script>
 </body>
 </html>

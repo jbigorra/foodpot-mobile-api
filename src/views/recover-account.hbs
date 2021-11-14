@@ -18,7 +18,7 @@
 
       <button type="submit">RECOVER</button>
 
-      <div class="error-message" id="error"></div>
+      <div class="error-message" id="error-message"></div>
     </form>
   </main>
 
@@ -41,7 +41,7 @@
         headers: {
           Authorization: "{{ accessToken }}"
         },
-        body: json.stringify({
+        body: JSON.stringify({
           password: this.password.value,
         }),
       })
