@@ -9,7 +9,7 @@
 <body>
   <script>
     const queryParams = window.location.href.split("#")[1];
-    const urlParams = new UrlSearchParams(queryParams);
+    const urlParams = new URLSearchParams(queryParams);
     const requestType = urlParams.get("type");
     let url = "{{ recoverUrl }}";
 
