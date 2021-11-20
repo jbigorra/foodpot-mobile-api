@@ -1,4 +1,4 @@
-import { SupabaseConfig } from "../../modules/config/supabase.config";
+import { SupabaseConfig } from "../../config/supabase.config";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 export enum SupabaseAuthType {
@@ -9,6 +9,7 @@ export enum SupabaseAuthType {
 }
 
 export const SUPABASE_CLIENT = "SUPABASE_CLIENT";
+
 export const supabaseProvider = {
   provide: SUPABASE_CLIENT,
   useFactory: (config: SupabaseConfig): SupabaseClient => {

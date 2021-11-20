@@ -6,6 +6,7 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import { AuthMiddleware } from "./middleware";
 import { PublicModule } from "./modules/public/public.module";
+import { VendorModule } from "./shared/modules/vendor/vendor.module";
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { PublicModule } from "./modules/public/public.module";
     DbModule,
     AuthModule,
     UsersModule,
-    PublicModule
+    PublicModule,
+    VendorModule
   ]
 })
 export class AppModule {
