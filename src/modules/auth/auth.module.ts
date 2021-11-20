@@ -8,6 +8,7 @@ import { SupabaseConfig } from "../../shared/modules/config/supabase.config";
 @Module({
   imports: [ServerConfigModule],
   providers: [AuthService, supabaseProvider, SupabaseConfig],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AuthService]
 })
 export class AuthModule {}
