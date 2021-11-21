@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Header, Post } from "@nestjs/common";
-import { AuthService } from "./auth.service";
 import {
+  AuthenticatedUserResponse,
+  AuthService,
+  RecoverAccountRequest,
   RefreshUserSessionRequest,
   SigninWithEmailRequest,
-  SignupWithEmailRequest,
-  RecoverAccountRequest
-} from "./requests/auth-request.schemas";
-import { AuthenticatedUserResponse } from "./responses/auth-response.schemas";
+  SignupWithEmailRequest
+} from ".";
 
 @Controller("auth")
 export class AuthController {

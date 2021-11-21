@@ -1,8 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthService } from "./auth.service";
 import { createMock } from "ts-auto-mock";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { SUPABASE_CLIENT } from "../../shared/modules/vendor/supabase/supabase.provider";
+import { AuthService } from ".";
+import { SUPABASE_CLIENT } from "../../shared/modules/vendor";
 
 describe("AuthService", () => {
   let service: AuthService;

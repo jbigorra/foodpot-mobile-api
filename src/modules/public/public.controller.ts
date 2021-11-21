@@ -3,16 +3,14 @@ import {
   ForbiddenException,
   Get,
   Query,
-  Render,
-  Req
+  Render
 } from "@nestjs/common";
-import { Request } from "express";
-import { ServerConfig } from "src/shared/modules/config/server.config";
-import { SupabaseAuthType } from "src/shared/vendors/supabase/supabase.provider";
 import {
   RecoverAccountTemplateResponse,
   RedirectAuthTemplateResponse
-} from "./template-response.schemas";
+} from ".";
+import { ServerConfig } from "../../shared/modules/config";
+import { SupabaseAuthType } from "../../shared/modules/vendor";
 
 @Controller("public")
 export class PublicController {

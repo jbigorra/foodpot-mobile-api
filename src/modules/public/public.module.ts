@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { ServerConfigModule } from "../../shared/modules/config/server.config.module";
+import { ServerConfigModule } from "../../shared/modules/config";
 import { PublicController } from "./public.controller";
 
 @Module({

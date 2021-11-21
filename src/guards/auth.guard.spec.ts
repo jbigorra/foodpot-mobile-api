@@ -1,7 +1,7 @@
-import { AuthGuard } from "./auth.guard";
-import { AuthService } from "../modules/auth/auth.service";
 import { ExecutionContext, UnauthorizedException } from "@nestjs/common";
 import { createMock } from "ts-auto-mock";
+import { AuthGuard } from ".";
+import { AuthService } from "../modules/auth";
 
 describe("AuthGuard", () => {
   let authService: AuthService;

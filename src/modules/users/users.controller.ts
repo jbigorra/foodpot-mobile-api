@@ -7,15 +7,15 @@ import {
   Req,
   UseGuards
 } from "@nestjs/common";
-import { AuthService } from "../auth/auth.service";
+import { Request } from "express";
 import {
   UpdateEmailRequest,
   UpdatePasswordRequest,
-  UpdateUserRequest
-} from "./requests/users-request.schemas";
-import { Request } from "express";
-import { AuthGuard } from "../../guards/auth.guard";
-import { UserResponse } from "./responses/users-response.schemas";
+  UpdateUserRequest,
+  UserResponse
+} from ".";
+import { AuthService } from "../auth";
+import { AuthGuard } from "../../guards";
 
 @UseGuards(AuthGuard)
 @Controller("users")

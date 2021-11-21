@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
-import { DbClient } from "src/shared/modules/database/db.client";
+import { DbClient } from "../../../shared/modules/database";
 
 const recipeWithIngredients = Prisma.validator<Prisma.RecipeArgs>()({
   include: { ingredients: true }
