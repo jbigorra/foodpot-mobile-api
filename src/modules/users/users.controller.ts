@@ -12,10 +12,10 @@ import {
   UpdateEmailRequest,
   UpdatePasswordRequest,
   UpdateUserRequest
-} from "./requests/users-requests.schemas";
+} from "./requests/users-request.schemas";
 import { Request } from "express";
 import { AuthGuard } from "../../guards/auth.guard";
-import { UserResponse } from "./responses/user-response.schemas";
+import { UserResponse } from "./responses/users-response.schemas";
 
 @UseGuards(AuthGuard)
 @Controller("users")

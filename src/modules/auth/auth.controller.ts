@@ -5,8 +5,8 @@ import {
   SigninWithEmailRequest,
   SignupWithEmailRequest,
   RecoverAccountRequest
-} from "./requests/auth-requests.schemas";
-import { AuthenticatedUserResponse } from "./responses/auth-responses.schemas";
+} from "./requests/auth-request.schemas";
+import { AuthenticatedUserResponse } from "./responses/auth-response.schemas";
 
 @Controller("auth")
 export class AuthController {
