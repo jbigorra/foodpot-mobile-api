@@ -1,11 +1,7 @@
 export class UpdateUserRequest {
-  fullname: string;
+  username: string;
 }
 
 export class UpdatePasswordRequest {
   password: string;
-}
-
-export class UpdateEmailRequest {
-  email: string;
 }

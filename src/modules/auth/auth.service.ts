@@ -54,7 +54,7 @@ export class AuthService {
     return { accessToken: data.access_token, refreshToken: data.refresh_token };
   }
 
-  async updateUser(jwt: string, userData: { fullname: string }): Promise<User> {
+  async updateUser(jwt: string, userData: { username: string }): Promise<User> {
     const userAttributes = { data: userData } as UserAttributes;
 
     const { data, error } = await this.supabase.auth.api.updateUser(

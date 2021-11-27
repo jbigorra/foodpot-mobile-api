@@ -5,7 +5,7 @@ export class UserResponse {
     readonly id: string,
     readonly email: string,
     readonly phone: string,
-    readonly fullname: string
+    readonly username: string
   ) {}
 
   static from(user: User): UserResponse {
@@ -13,7 +13,7 @@ export class UserResponse {
       user.id,
       user.email,
       user.phone,
-      user.user_metadata.fullname || ""
+      user.user_metadata.username || ""
     );
   }
 }
