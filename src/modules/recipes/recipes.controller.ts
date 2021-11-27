@@ -7,8 +7,9 @@ import {
   ParseIntPipe,
   Query
 } from "@nestjs/common";
-import { RecipeResponse, RecipesQueries } from ".";
+import { RecipeResponse } from ".";
 import { DbCursorPipe } from "../../pipes";
+import { RecipesQueries } from "./db/recipe.queries";
 
 @Controller("recipes")
 export class RecipesController {

@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
-import { RecipesController, RecipesQueries } from ".";
-import { DbModule } from "../../shared/modules/database";
+import { RecipesController } from ".";
+import { RecipesQueries } from "./db/recipe.queries";
+import { DbModule } from "../../shared/modules/database/db.module";
 
 @Module({
   imports: [DbModule],

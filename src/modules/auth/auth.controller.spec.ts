@@ -1,12 +1,16 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { createMock } from "ts-auto-mock";
-import { AuthController, AuthService } from ".";
+import { createMock } from "@golevelup/ts-jest";
+import { AuthController } from ".";
+import { AuthService } from "./auth.service";
+import { ServerConfigModule } from "../../shared/modules/config/server.config.module";
+import { VendorModule } from "../../shared/modules/vendor/vendor.module";
 
 describe("AuthController", () => {
   let controller: AuthController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [ServerConfigModule, VendorModule],
       controllers: [AuthController],
       providers: [
         {

@@ -1,5 +1,5 @@
 import { Ingredient } from "@prisma/client";
-import { RecipeWithIngredients } from "../";
+import { RecipeWithIngredients } from "../db/recipe.queries";
 
 export class RecipeResponse {
   constructor(

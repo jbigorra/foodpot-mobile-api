@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { ServerConfigModule } from "../../shared/modules/config";
 import { PublicController } from "./public.controller";
+import { ServerConfigModule } from "../../shared/modules/config/server.config.module";
 
 @Module({
   imports: [ServerConfigModule],

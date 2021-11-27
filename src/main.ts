@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { ServerConfig } from "./shared/modules/config";
+import { ServerConfig } from "./shared/modules/config/server.config";
 import { join } from "path";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

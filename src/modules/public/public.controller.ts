@@ -9,8 +9,8 @@ import {
   RecoverAccountTemplateResponse,
   RedirectAuthTemplateResponse
 } from ".";
-import { ServerConfig } from "../../shared/modules/config";
-import { SupabaseAuthType } from "../../shared/modules/vendor";
+import { ServerConfig } from "../../shared/modules/config/server.config";
+import { SupabaseAuthType } from "../../shared/modules/vendor/supabase/supabase.provider";
 
 @Controller("public")
 export class PublicController {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { PublicController } from ".";
-import { ServerConfig } from "../../shared/modules/config";
 import { createMock } from "@golevelup/ts-jest";
+import { ServerConfig } from "../../shared/modules/config/server.config";
 
 describe("PublicController", () => {
   let controller: PublicController;

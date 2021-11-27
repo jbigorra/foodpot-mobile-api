@@ -1,6 +1,6 @@
-import { SupabaseConfig } from "../../config";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { SUPABASE_CLIENT } from "../../../../deps-tokens/tokens";
+import { SupabaseConfig } from "../../config/supabase.config";
 
 export enum SupabaseAuthType {
   SIGNUP = "signup",

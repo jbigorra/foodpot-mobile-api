@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { DbClient } from ".";
+import { DbClient } from "./db.client";
 
 @Module({
   providers: [DbClient],

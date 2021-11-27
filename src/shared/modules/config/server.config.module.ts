@@ -1,7 +1,9 @@
 import { Module } from "@nestjs/common";
 import configuration from "./main.config";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { ServerConfig, serverConfigValidationSchema, SupabaseConfig } from ".";
+import { serverConfigValidationSchema } from ".";
+import { SupabaseConfig } from "./supabase.config";
+import { ServerConfig } from "./server.config";
 
 const envFileMap = {
   // local: ".environment/.env.local",
