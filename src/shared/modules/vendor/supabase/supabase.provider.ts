@@ -1,4 +1,4 @@
-import { SupabaseConfig } from "../../config/supabase.config";
+import { SupabaseConfig } from "../../config";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { SUPABASE_CLIENT } from "../../../../deps-tokens/tokens";
 
