@@ -1,5 +1,6 @@
 import { SupabaseConfig } from "../../config/supabase.config";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { SUPABASE_CLIENT } from "../../../../deps-tokens/tokens";
 
 export enum SupabaseAuthType {
   SIGNUP = "signup",
@@ -7,8 +8,6 @@ export enum SupabaseAuthType {
   RECOVERY = "recovery",
   INVITE = "invite"
 }
-
-export const SUPABASE_CLIENT = "SUPABASE_CLIENT";
 
 export const supabaseProvider = {
   provide: SUPABASE_CLIENT,

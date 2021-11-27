@@ -1,9 +1,7 @@
 import { Module } from "@nestjs/common";
+import { SUPABASE_CLIENT } from "../../../deps-tokens/tokens";
 import { ServerConfigModule } from "../config/server.config.module";
-import {
-  supabaseProvider,
-  SUPABASE_CLIENT
-} from "./supabase/supabase.provider";
+import { supabaseProvider } from "./supabase/supabase.provider";
 
 @Module({
   imports: [ServerConfigModule],

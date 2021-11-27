@@ -1,7 +1,7 @@
 import { HttpException, Inject, Injectable } from "@nestjs/common";
 import { SupabaseClient, User, UserAttributes } from "@supabase/supabase-js";
+import { SUPABASE_CLIENT } from "../../deps-tokens/tokens";
 import { ServerConfig } from "../../shared/modules/config/server.config";
-import { SUPABASE_CLIENT } from "../../shared/modules/vendor/supabase/supabase.provider";
 
 export type AuthenticatedUser = { accessToken: string; refreshToken: string };
 type SupabaseAuthError = { message: string; status: number };
