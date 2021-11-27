@@ -1,9 +1,7 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { RecipesController, RecipesQueries } from ".";
-import { createMock } from "ts-auto-mock";
+import { RecipesController } from ".";
 
 describe.skip("RecipesController", () => {
-  // let controller: RecipesController;
+  let controller: RecipesController;
   // beforeEach(async () => {
   //   const module: TestingModule = await Test.createTestingModule({
   //     controllers: [RecipesController],
@@ -16,7 +14,8 @@ describe.skip("RecipesController", () => {
   //   }).compile();
   //   controller = module.get<RecipesController>(RecipesController);
   // });
-  // it("should be defined", () => {
-  //   expect(controller).toBeDefined();
-  // });
+
+  it("should be defined", () => {
+    // expect(controller).toBeDefined();
+  });
 });
