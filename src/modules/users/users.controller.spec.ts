@@ -1,13 +1,15 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { createMock } from "ts-auto-mock";
+import { createMock } from "@golevelup/ts-jest";
 import { UsersController } from ".";
-import { AuthService } from "../auth";
+import { AuthService } from "../auth/auth.service";
+import { AuthModule } from "../auth/auth.module";
 
 describe("UsersController", () => {
   let controller: UsersController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [AuthModule],
       controllers: [UsersController],
       providers: [
         {

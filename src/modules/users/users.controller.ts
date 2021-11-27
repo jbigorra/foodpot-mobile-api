@@ -10,7 +10,7 @@ import {
 import { Request } from "express";
 import { AuthGuard } from "../../guards";
 import { UpdatePasswordRequest, UpdateUserRequest, UserResponse } from ".";
-import { AuthService } from "../auth";
+import { AuthService } from "../auth/auth.service";
 
 @UseGuards(AuthGuard)
 @Controller("users")
