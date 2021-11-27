@@ -38,6 +38,9 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Jest
+jest-cache
+
 # Supabase
 .supabase
 
