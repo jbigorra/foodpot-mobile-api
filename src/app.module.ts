@@ -22,7 +22,10 @@ import { VendorModule } from "./shared/modules/vendor/vendor.module";
   providers: [
     {
       provide: APP_PIPE,
-      useValue: new ValidationPipe()
+      useValue: new ValidationPipe({
+        transform: true,
+        whitelist: true
+      })
     }
   ]
 })

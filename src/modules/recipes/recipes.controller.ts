@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Query
 } from "@nestjs/common";
+import { ApiParam, ApiQuery, ApiResponse } from "@nestjs/swagger";
 import { RecipeResponse } from ".";
 import { DbCursorPipe } from "../../pipes";
 import { RecipesQueries } from "./db/recipe.queries";
@@ -16,6 +17,13 @@ export class RecipesController {
   constructor(private queryRecipes: RecipesQueries) {}
 
   @Get()
+  @ApiQuery({ name: "lastRecipeId", type: Number })
+  @ApiQuery({ name: "take", type: Number })
+  @ApiQuery({ name: "searchText", type: String })
+  @ApiResponse({
+    type: [RecipeResponse],
+    description: "Returns a list of recipes"
+  })
   async getAll(
     @Query("lastRecipeId", DbCursorPipe) lastRecipeId: number,
     @Query("take", new DefaultValuePipe(50), ParseIntPipe) take: number,
@@ -30,6 +38,11 @@ export class RecipesController {
   }
 
   @Get(":uuid")
+  @ApiParam({ name: "uuid", type: String })
+  @ApiResponse({
+    type: RecipeResponse,
+    description: "Returns one specific recipe by uuid"
+  })
   async getOne(@Param("uuid") uuid: string): Promise<RecipeResponse> {
     const recipe = await this.queryRecipes.getOneByUuid(uuid);
 
