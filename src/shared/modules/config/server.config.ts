@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, LogLevel } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
@@ -11,5 +11,9 @@ export class ServerConfig {
 
   get apiUrl(): string {
     return this.configService.get<string>("server.apiUrl");
+  }
+
+  get logLevel(): LogLevel {
+    return this.configService.get<LogLevel>("server.logLevel");
   }
 }
