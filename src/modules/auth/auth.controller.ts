@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Header, Post } from "@nestjs/common";
-import { ApiBasicAuth, ApiBody } from "@nestjs/swagger";
+// import { ApiBasicAuth, ApiBody } from "@nestjs/swagger";
 import {
   AuthenticatedUserResponse,
   RecoverAccountRequest,
@@ -9,13 +9,13 @@ import {
 } from ".";
 import { AuthService } from "./auth.service";
 
-@ApiBasicAuth()
+// @ApiBasicAuth()
 @Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post("/signup")
-  @ApiBody({ type: SignupWithEmailRequest })
+  // @ApiBody({ type: SignupWithEmailRequest })
   async signupWithEmail(
     @Body() { email, password }: SignupWithEmailRequest
   ): Promise<void> {
@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Post("/signin")
-  @ApiBody({ type: SigninWithEmailRequest })
+  // @ApiBody({ type: SigninWithEmailRequest })
   async signin(
     @Body() { email, password }: SigninWithEmailRequest
   ): Promise<AuthenticatedUserResponse> {
@@ -33,7 +33,7 @@ export class AuthController {
   }
 
   @Post("/refresh")
-  @ApiBody({ type: RefreshUserSessionRequest })
+  // @ApiBody({ type: RefreshUserSessionRequest })
   async refresh(
     @Body() { refreshToken }: RefreshUserSessionRequest
   ): Promise<AuthenticatedUserResponse> {
@@ -43,7 +43,7 @@ export class AuthController {
   }
 
   @Post("/recover")
-  @ApiBody({ type: RecoverAccountRequest })
+  // @ApiBody({ type: RecoverAccountRequest })
   async recover(@Body() { email }: RecoverAccountRequest): Promise<void> {
     await this.authService.recoverAccountFor(email);
   }

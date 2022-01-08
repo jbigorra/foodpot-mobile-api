@@ -5,6 +5,7 @@ import {
   Query,
   Render
 } from "@nestjs/common";
+// import { ApiExcludeController } from "@nestjs/swagger";
 import {
   RecoverAccountTemplateResponse,
   RedirectAuthTemplateResponse
@@ -13,6 +14,7 @@ import { ServerConfig } from "../../shared/modules/config/server.config";
 import { SupabaseAuthType } from "../../shared/modules/vendor/supabase/supabase.provider";
 
 @Controller("public")
+// @ApiExcludeController()
 export class PublicController {
   constructor(private readonly serverConfig: ServerConfig) {}
 
