@@ -4,7 +4,8 @@ export default () => ({
   server: {
     port: process.env.PORT || 3000,
     apiUrl: process.env.API_HOST_URL,
-    logLevel: process.env.LOG_LEVEL || "debug"
+    logLevel: process.env.LOG_LEVEL || "debug",
+    swaggerPass: process.env.SWAGGER_DOCS_PASSWORD
   },
   supabase: {
     apiUrl: process.env.SUPABASE_URL,

@@ -16,4 +16,8 @@ export class ServerConfig {
   get logLevel(): LogLevel {
     return this.configService.get<LogLevel>("server.logLevel");
   }
+
+  get swaggerPass(): string {
+    return this.configService.get<string>("server.swaggerPass");
+  }
 }

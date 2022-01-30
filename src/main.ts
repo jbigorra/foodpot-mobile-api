@@ -5,6 +5,7 @@ import { join } from "path";
 import { AppModule } from "./app.module";
 import { ServerConfig } from "./shared/modules/config/server.config";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import * as basicAuth from "express-basic-auth";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function bootstrap(): Promise<void> {
@@ -19,7 +20,19 @@ async function bootstrap(): Promise<void> {
   app.setBaseViewsDir(join(__dirname, "../src", "views"));
   app.setViewEngine("hbs");
 
+  const serverConfig = app.get(ServerConfig);
+
   // SWAGGER CONFIGURATION
+  app.use(
+    ["/v1/docs", "/v1/docs-json"],
+    basicAuth({
+      challenge: true,
+      users: {
+        foodpot: serverConfig.swaggerPass
+      }
+    })
+  );
+
   const config = new DocumentBuilder()
     .setTitle("Foodpot API Docs")
     .setDescription("Food API swagger reference")
@@ -28,10 +41,9 @@ async function bootstrap(): Promise<void> {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("v1", app, document);
+  SwaggerModule.setup("v1/docs", app, document);
 
   // INITIALIZE SERVER
-  const serverConfig = app.get(ServerConfig);
 
   await app.listen(serverConfig.port);
 

@@ -7,7 +7,8 @@ export const serverConfigValidationSchema = Joi.object({
     apiUrl: Joi.string().required(),
     logLevel: Joi.string()
       .valid("log", "error", "warn", "debug", "verbose")
-      .default("debug")
+      .default("debug"),
+    swaggerPass: Joi.string().required()
   },
   supabase: {
     apiUrl: Joi.string().required(),
