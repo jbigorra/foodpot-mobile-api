@@ -6,12 +6,9 @@ import {
   Render
 } from "@nestjs/common";
 // import { ApiExcludeController } from "@nestjs/swagger";
-import {
-  RecoverAccountTemplateResponse,
-  RedirectAuthTemplateResponse
-} from ".";
 import { ServerConfig } from "../../shared/modules/config/server.config";
 import { SupabaseAuthType } from "../../shared/modules/vendor/supabase/supabase.provider";
+import { RecoverAccountTemplateResponse, RedirectAuthTemplateResponse } from "./template-response.schemas";
 
 @Controller("public")
 // @ApiExcludeController()

@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Header, Post } from "@nestjs/common";
 // import { ApiBasicAuth, ApiBody } from "@nestjs/swagger";
+import { AuthService } from "./auth.service";
 import {
-  AuthenticatedUserResponse,
   RecoverAccountRequest,
   RefreshUserSessionRequest,
   SigninWithEmailRequest,
   SignupWithEmailRequest
-} from ".";
-import { AuthService } from "./auth.service";
+} from "./requests/auth-request.dto";
+import { AuthenticatedUserResponse } from "./responses/auth-response.dto";
 
 // @ApiBasicAuth()
 @Controller("auth")
@@ -16,6 +16,7 @@ export class AuthController {
 
   @Post("/signup")
   // @ApiBody({ type: SignupWithEmailRequest })
+  // TODO: Signup with existing email should fail but it does not. 201 Created is returned
   async signupWithEmail(
     @Body() { email, password }: SignupWithEmailRequest
   ): Promise<void> {

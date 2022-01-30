@@ -9,8 +9,12 @@ import {
 } from "@nestjs/common";
 import { Request } from "express";
 import { AuthGuard } from "../../guards";
-import { UpdatePasswordRequest, UpdateUserRequest, UserResponse } from ".";
 import { AuthService } from "../auth/auth.service";
+import { UserResponse } from "./responses/users-response.dto";
+import {
+  UpdatePasswordRequest,
+  UpdateUserRequest
+} from "./requests/users-request.dto";
 
 @UseGuards(AuthGuard)
 @Controller("users")
