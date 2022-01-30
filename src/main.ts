@@ -4,6 +4,7 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import { join } from "path";
 import { AppModule } from "./app.module";
 import { ServerConfig } from "./shared/modules/config/server.config";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function bootstrap(): Promise<void> {
@@ -19,15 +20,15 @@ async function bootstrap(): Promise<void> {
   app.setViewEngine("hbs");
 
   // SWAGGER CONFIGURATION
-  // const config = new DocumentBuilder()
-  //   .setTitle("Foodpot API Docs")
-  //   .setDescription("Food API swagger reference")
-  //   .setVersion("1.0")
-  //   .addTag("foodpot")
-  //   .build();
-  //
-  // const document = SwaggerModule.createDocument(app, config);
-  // SwaggerModule.setup("v1", app, document);
+  const config = new DocumentBuilder()
+    .setTitle("Foodpot API Docs")
+    .setDescription("Food API swagger reference")
+    .setVersion("1.0")
+    .addTag("foodpot")
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup("v1", app, document);
 
   // INITIALIZE SERVER
   const serverConfig = app.get(ServerConfig);
