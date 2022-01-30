@@ -1,5 +1,10 @@
 import { HttpException, Inject, Injectable } from "@nestjs/common";
-import { SupabaseClient, User, UserAttributes } from "@supabase/supabase-js";
+import {
+  ApiError,
+  SupabaseClient,
+  User,
+  UserAttributes
+} from "@supabase/supabase-js";
 import { SUPABASE_CLIENT } from "../../deps-tokens/tokens";
 import { ServerConfig } from "../../shared/modules/config/server.config";
 
@@ -114,7 +119,7 @@ export class AuthService {
     return;
   }
 
-  private _handleError(error: Error): void {
+  private _handleError(error: ApiError): void {
     const e = error as unknown as SupabaseAuthError;
     throw new HttpException(e.message, e.status);
   }
