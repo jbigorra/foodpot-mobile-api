@@ -11,7 +11,8 @@ export class IsEqualTo implements ValidatorConstraintInterface {
     return password === confirmPassword;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   defaultMessage(_: ValidationArguments): string {
-    return "Passwords do not match";
+    return "passwords do not match";
   }
 }
