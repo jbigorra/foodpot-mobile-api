@@ -1,6 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { createMock } from "@golevelup/ts-jest";
-import { AuthController } from ".";
+import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { ServerConfigModule } from "../../shared/modules/config/server.config.module";
 import { VendorModule } from "../../shared/modules/vendor/vendor.module";

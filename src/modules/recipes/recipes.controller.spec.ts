@@ -1,4 +1,4 @@
-import { RecipesController } from ".";
+import { RecipesController } from "./recipes.controller";
 import { Test, TestingModule } from "@nestjs/testing";
 import { RecipesQueries } from "./db/recipe.queries";
 import { createMock } from "@golevelup/ts-jest";

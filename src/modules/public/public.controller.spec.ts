@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { PublicController } from ".";
+import { PublicController } from "./public.controller";
 import { createMock } from "@golevelup/ts-jest";
 import { ServerConfig } from "../../shared/modules/config/server.config";
 

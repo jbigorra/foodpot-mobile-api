@@ -18,7 +18,7 @@ export class RecipesQueries {
     cursor?: number;
     take?: number;
     searchText?: string;
-    orderBy?: Prisma.RecipeOrderByWithRelationInput;
+    orderBy?: Prisma.RecipeOrderByWithRelationAndSearchRelevanceInput;
   }): Promise<RecipeWithIngredients[]> {
     const { cursor, take, searchText, orderBy } = params;
     return this.db.recipe.findMany({
