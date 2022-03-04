@@ -32,6 +32,7 @@
     "@nestjs/common": "^8.3.1",
     "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.3.1",
+    "@nestjs/mongoose": "^9.0.2",
     "@nestjs/platform-express": "^8.3.1",
     "@nestjs/swagger": "^5.2.0",
     "@prisma/client": "^3.9.2",
@@ -43,6 +44,7 @@
     "express-basic-auth": "^1.2.1",
     "hbs": "^4.1.2",
     "jwt-decode": "^3.1.2",
+    "mongoose": "^6.2.4",
     "nestjs-pino": "^2.5.0",
     "pino-http": "^6.6.0",
     "reflect-metadata": "^0.1.13",
@@ -51,6 +53,7 @@
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.6",
     "@golevelup/ts-jest": "^0.3.2",
     "@nestjs/cli": "^8.2.1",
     "@nestjs/schematics": "^8.0.6",
