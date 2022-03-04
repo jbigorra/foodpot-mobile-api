@@ -11,5 +11,8 @@ export default () => ({
     apiUrl: process.env.SUPABASE_URL,
     publicApiKey: process.env.SUPABASE_PUBLIC_KEY,
     databaseUrl: process.env.DATABASE_URL
+  },
+  mongodb: {
+    databaseUrl: process.env.MONGO_DB_URL
   }
 });

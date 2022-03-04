@@ -1,10 +1,9 @@
-import { Ingredient } from "@prisma/client";
-import { RecipeWithIngredients } from "../db/recipe.queries";
+import { Recipe, Ingredient } from "../db/schemas/recipes.schema";
 
 export class RecipeResponse {
   readonly calories: string;
   readonly cookTime: string;
-  readonly id: number;
+  readonly id?: number;
   readonly uuid: string;
   readonly title: string;
   readonly ingredients: IngredientDTO[];
@@ -17,7 +16,6 @@ export class RecipeResponse {
   constructor(
     calories: string,
     cookTime: string,
-    id: number,
     uuid: string,
     title: string,
     ingredients: IngredientDTO[],
@@ -29,7 +27,6 @@ export class RecipeResponse {
   ) {
     this.calories = calories;
     this.cookTime = cookTime;
-    this.id = id;
     this.uuid = uuid;
     this.title = title;
     this.ingredients = ingredients;
@@ -40,14 +37,13 @@ export class RecipeResponse {
     this.servings = servings;
   }
 
-  static fromArrayOf(recipes: RecipeWithIngredients[]): RecipeResponse[] {
+  static fromArrayOf(recipes: Recipe[]): RecipeResponse[] {
     return recipes.map(
       (r) =>
         new RecipeResponse(
           r.calories,
           r.cookTime,
-          r.id,
-          r.uuid,
+          r._id.toString(),
           r.title,
           IngredientDTO.fromDbModel(r.ingredients),
           r.marinateTime,
@@ -59,12 +55,11 @@ export class RecipeResponse {
     );
   }
 
-  static fromOne(recipe: RecipeWithIngredients): RecipeResponse {
+  static fromOne(recipe: Recipe): RecipeResponse {
     return new RecipeResponse(
       recipe.calories,
       recipe.cookTime,
-      recipe.id,
-      recipe.uuid,
+      recipe._id.toString(),
       recipe.title,
       IngredientDTO.fromDbModel(recipe.ingredients),
       recipe.marinateTime,

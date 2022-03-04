@@ -10,10 +10,13 @@ import {
 import { DbCursorPipe } from "../../pipes";
 import { RecipesQueries } from "./db/recipe.queries";
 import { RecipeResponse } from "./responses/recipes-response.dto";
+import { Recipe, RecipeDocument } from "./db/schemas/recipes.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 
 @Controller("recipes")
 export class RecipesController {
-  constructor(private queryRecipes: RecipesQueries) {}
+  constructor(private recipeQueries: RecipesQueries) {}
 
   @Get()
   // @ApiQuery({ name: "lastRecipeId", type: Number })
@@ -28,7 +31,7 @@ export class RecipesController {
     @Query("take", new DefaultValuePipe(50), ParseIntPipe) take: number,
     @Query("searchText") searchText: string
   ): Promise<RecipeResponse[]> {
-    const recipes = await this.queryRecipes.getManyByText({
+    const recipes = await this.recipeQueries.getManyByText({
       cursor: lastRecipeId,
       take,
       searchText
@@ -43,7 +46,7 @@ export class RecipesController {
   //   description: "Returns one specific recipe by uuid"
   // })
   async getOne(@Param("uuid") uuid: string): Promise<RecipeResponse> {
-    const recipe = await this.queryRecipes.getOneByUuid(uuid);
+    const recipe = await this.recipeQueries.getOneByUuid(uuid);
 
     if (!recipe) throw new NotFoundException();
 

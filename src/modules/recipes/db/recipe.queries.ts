@@ -1,49 +1,28 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma } from "@prisma/client";
-import { DbClient } from "../../../shared/modules/database/db.client";
-
-const recipeWithIngredients = Prisma.validator<Prisma.RecipeArgs>()({
-  include: { ingredients: true }
-});
-
-export type RecipeWithIngredients = Prisma.RecipeGetPayload<
-  typeof recipeWithIngredients
->;
+import { Recipe, RecipeDocument } from "./schemas/recipes.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 
 @Injectable()
 export class RecipesQueries {
-  constructor(private db: DbClient) {}
+  constructor(
+    @InjectModel(Recipe.name) private recipe: Model<RecipeDocument>
+  ) {}
 
   async getManyByText(params: {
     cursor?: number;
     take?: number;
     searchText?: string;
-    orderBy?: Prisma.RecipeOrderByWithRelationAndSearchRelevanceInput;
-  }): Promise<RecipeWithIngredients[]> {
+    orderBy?: string;
+  }): Promise<Recipe[]> {
     const { cursor, take, searchText, orderBy } = params;
-    return this.db.recipe.findMany({
-      cursor: cursor ? { id: cursor } : undefined,
-      take,
-      orderBy,
-      where: {
-        searchTerms: {
-          contains: searchText
-        }
-      },
-      include: {
-        ingredients: true
-      }
-    });
+    return await this.recipe
+      .find({ $text: { $search: searchText } })
+      .limit(take)
+      .exec();
   }
 
-  async getOneByUuid(uuid: string): Promise<RecipeWithIngredients | null> {
-    return this.db.recipe.findUnique({
-      where: {
-        uuid: uuid
-      },
-      include: {
-        ingredients: true
-      }
-    });
+  async getOneByUuid(uuid: string): Promise<Recipe | null> {
+    return await this.recipe.findById(uuid).exec();
   }
 }
