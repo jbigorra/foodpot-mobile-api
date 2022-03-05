@@ -27,12 +27,12 @@ export class RecipesController {
   //   description: "Returns a list of recipes"
   // })
   async getAll(
-    @Query("lastRecipeId", DbCursorPipe) lastRecipeId: number,
+    @Query("page", new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query("take", new DefaultValuePipe(50), ParseIntPipe) take: number,
     @Query("searchText") searchText: string
   ): Promise<RecipeResponse[]> {
     const recipes = await this.recipeQueries.getManyByText({
-      cursor: lastRecipeId,
+      page,
       take,
       searchText
     });

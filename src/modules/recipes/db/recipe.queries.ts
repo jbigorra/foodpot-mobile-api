@@ -10,15 +10,28 @@ export class RecipesQueries {
   ) {}
 
   async getManyByText(params: {
-    cursor?: number;
+    page?: number;
     take?: number;
     searchText?: string;
-    orderBy?: string;
+    sort?: string;
   }): Promise<Recipe[]> {
-    const { cursor, take, searchText, orderBy } = params;
+    const { page, take, searchText, sort } = params;
+    const skip = (page - 1) * take;
     return await this.recipe
-      .find({ $text: { $search: searchText } })
-      .limit(take)
+      .aggregate([
+        {
+          $match: {
+            $text: {
+              $search: searchText
+            }
+          }
+        },
+        {
+          $skip: skip
+        },
+        { $limit: take },
+        { $sort: { createdAt: -1 } }
+      ])
       .exec();
   }
 
