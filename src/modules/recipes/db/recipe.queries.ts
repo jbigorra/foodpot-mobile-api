@@ -17,15 +17,16 @@ export class RecipesQueries {
   }): Promise<Recipe[]> {
     const { page, take, searchText, sort } = params;
     const skip = (page - 1) * take;
+    const match = searchText
+      ? {
+          $text: {
+            $search: searchText
+          }
+        }
+      : {};
     return await this.recipe
       .aggregate([
-        {
-          $match: {
-            $text: {
-              $search: searchText
-            }
-          }
-        },
+        { $match: match },
         {
           $skip: skip
         },
