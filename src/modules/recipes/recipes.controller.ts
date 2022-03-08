@@ -1,50 +1,61 @@
 import {
   Controller,
-  DefaultValuePipe,
   Get,
   NotFoundException,
   Param,
-  ParseIntPipe,
   Query
 } from "@nestjs/common";
-import { DbCursorPipe } from "../../pipes";
 import { RecipesQueries } from "./db/recipe.queries";
 import { RecipeResponse } from "./responses/recipes-response.dto";
-import { Recipe, RecipeDocument } from "./db/schemas/recipes.schema";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { IsInt, IsOptional, IsString } from "class-validator";
+import { Transform } from "class-transformer";
+import { ApiPropertyOptional } from "@nestjs/swagger";
+
+export class RecipeFilters {
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  @ApiPropertyOptional({ type: Number, default: 1 })
+  page = 1;
+
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  @ApiPropertyOptional({ type: Number, default: 10, maximum: 100 })
+  take = 50;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ type: String, default: "" })
+  searchText?: string = "";
+
+  @IsOptional()
+  @IsString({ each: true })
+  @Transform(({ value }) => value.split(","))
+  @ApiPropertyOptional({
+    type: String,
+    default: "",
+    example: "lunch,dinner,quick",
+    description: "Comma separated string values"
+  })
+  categories?: string[] = [];
+}
 
 @Controller("recipes")
 export class RecipesController {
   constructor(private recipeQueries: RecipesQueries) {}
 
   @Get()
-  // @ApiQuery({ name: "lastRecipeId", type: Number })
-  // @ApiQuery({ name: "take", type: Number })
-  // @ApiQuery({ name: "searchText", type: String })
-  // @ApiResponse({
-  //   type: [RecipeResponse],
-  //   description: "Returns a list of recipes"
-  // })
-  async getAll(
-    @Query("page", new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query("take", new DefaultValuePipe(50), ParseIntPipe) take: number,
-    @Query("searchText") searchText: string
-  ): Promise<RecipeResponse[]> {
+  async getAll(@Query() filters: RecipeFilters): Promise<RecipeResponse[]> {
+    const { page, take, searchText, categories } = filters;
     const recipes = await this.recipeQueries.getManyByText({
       page,
       take,
-      searchText
+      searchText,
+      categories
     });
     return RecipeResponse.fromArrayOf(recipes);
   }
 
   @Get(":uuid")
-  // @ApiParam({ name: "uuid", type: String })
-  // @ApiResponse({
-  //   type: RecipeResponse,
-  //   description: "Returns one specific recipe by uuid"
-  // })
   async getOne(@Param("uuid") uuid: string): Promise<RecipeResponse> {
     const recipe = await this.recipeQueries.getOneByUuid(uuid);
 

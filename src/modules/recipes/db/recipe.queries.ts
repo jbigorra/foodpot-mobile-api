@@ -13,20 +13,26 @@ export class RecipesQueries {
     page?: number;
     take?: number;
     searchText?: string;
+    categories?: string[];
     sort?: string;
   }): Promise<Recipe[]> {
-    const { page, take, searchText, sort } = params;
+    const { page, take, searchText, categories, sort } = params;
     const skip = (page - 1) * take;
-    const match = searchText
+    const textSearch = searchText
       ? {
           $text: {
-            $search: searchText
+            $search: `${searchText}`
           }
         }
       : {};
+    const tags = categories.length ? { tags: { $all: categories } } : {};
     return await this.recipe
       .aggregate([
-        { $match: match },
+        {
+          $match: {
+            $and: [tags, textSearch]
+          }
+        },
         {
           $skip: skip
         },
